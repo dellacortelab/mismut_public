@@ -1,0 +1,11 @@
+.venv/
+.venv-tia/
+__pycache__/
+*.pyc
+.DS_Store
+.metadata_never_index
+data/
+emb/
+ref/
+logs/
+results/preds/

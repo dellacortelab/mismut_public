@@ -1,0 +1,116 @@
+encoder,comparison,auc_a,auc_b,delta,CI_low,CI_high,p_boot
+phikon_ref,max [all] - mean [all],0.7656,0.7926,-0.0270,-0.1305,0.0826,0.5980
+phikon_ref,mean+max [all] - mean [all],0.7890,0.7926,-0.0036,-0.0821,0.0806,0.9028
+phikon_ref,abmil [all] - mean [all],0.8560,0.7926,0.0634,0.0100,0.1263,0.0148
+phikon_ref,max [all] - abmil [all],0.7656,0.8560,-0.0904,-0.2024,0.0104,0.0780
+phikon_ref,mean+count [all] - mean [all],0.7942,0.7926,0.0016,-0.0223,0.0255,0.9108
+phikon_ref,max+count [all] - max [all],0.7651,0.7656,-0.0005,-0.0073,0.0057,0.9656
+phikon_ref,mean+max+count [all] - mean+max [all],0.7879,0.7890,-0.0010,-0.0062,0.0042,0.7272
+phikon_ref,mean [matched] - mean [all],0.7836,0.7926,-0.0090,-0.0247,0.0023,0.1464
+phikon_ref,max [matched] - max [all],0.8517,0.7656,0.0861,-0.0041,0.1805,0.0616
+phikon_ref,mean+max [matched] - mean+max [all],0.8333,0.7890,0.0443,-0.0292,0.1189,0.2464
+phikon_ref,abmil [matched] - abmil [all],0.8694,0.8560,0.0134,-0.0114,0.0416,0.3020
+phikon,max [all] - mean [all],0.7765,0.7890,-0.0125,-0.1195,0.1019,0.8140
+phikon,mean+max [all] - mean [all],0.7968,0.7890,0.0078,-0.0769,0.0988,0.8912
+phikon,abmil [all] - mean [all],0.8547,0.7890,0.0657,0.0023,0.1372,0.0412
+phikon,max [all] - abmil [all],0.7765,0.8547,-0.0782,-0.1864,0.0234,0.1348
+phikon,mean+count [all] - mean [all],0.7989,0.7890,0.0099,-0.0140,0.0354,0.4332
+phikon,max+count [all] - max [all],0.7739,0.7765,-0.0026,-0.0094,0.0026,0.3864
+phikon,mean+max+count [all] - mean+max [all],0.7931,0.7968,-0.0036,-0.0099,0.0010,0.1616
+phikon,mean [matched] - mean [all],0.7884,0.7890,-0.0006,-0.0118,0.0099,0.9476
+phikon,max [matched] - max [all],0.8538,0.7765,0.0773,-0.0112,0.1646,0.0908
+phikon,mean+max [matched] - mean+max [all],0.8386,0.7968,0.0418,-0.0344,0.1162,0.2764
+phikon,abmil [matched] - abmil [all],0.8722,0.8547,0.0175,-0.0162,0.0556,0.3296
+phikon_v2,max [all] - mean [all],0.7448,0.8212,-0.0764,-0.1876,0.0374,0.1936
+phikon_v2,mean+max [all] - mean [all],0.7734,0.8212,-0.0478,-0.1445,0.0509,0.3304
+phikon_v2,abmil [all] - mean [all],0.8789,0.8212,0.0577,0.0139,0.1081,0.0076
+phikon_v2,max [all] - abmil [all],0.7448,0.8789,-0.1341,-0.2368,-0.0308,0.0104
+phikon_v2,mean+count [all] - mean [all],0.8300,0.8212,0.0088,-0.0052,0.0249,0.2428
+phikon_v2,max+count [all] - max [all],0.7458,0.7448,0.0010,-0.0057,0.0078,0.7888
+phikon_v2,mean+max+count [all] - mean+max [all],0.7749,0.7734,0.0016,-0.0047,0.0094,0.7180
+phikon_v2,mean [matched] - mean [all],0.8194,0.8212,-0.0018,-0.0091,0.0055,0.5996
+phikon_v2,max [matched] - max [all],0.8467,0.7448,0.1019,0.0297,0.1786,0.0024
+phikon_v2,mean+max [matched] - mean+max [all],0.8497,0.7734,0.0763,0.0006,0.1563,0.0496
+phikon_v2,abmil [matched] - abmil [all],0.8787,0.8789,-0.0002,-0.0205,0.0210,0.9812
+uni,max [all] - mean [all],0.6866,0.8508,-0.1642,-0.2905,-0.0364,0.0096
+uni,mean+max [all] - mean [all],0.7474,0.8508,-0.1034,-0.2084,-0.0052,0.0424
+uni,abmil [all] - mean [all],0.8863,0.8508,0.0355,0.0024,0.0717,0.0328
+uni,max [all] - abmil [all],0.6866,0.8863,-0.1998,-0.3259,-0.0750,0.0012
+uni,mean+count [all] - mean [all],0.8529,0.8508,0.0021,-0.0088,0.0130,0.7144
+uni,max+count [all] - max [all],0.6840,0.6866,-0.0026,-0.0094,0.0036,0.4744
+uni,mean+max+count [all] - mean+max [all],0.7479,0.7474,0.0005,-0.0088,0.0088,0.9296
+uni,mean [matched] - mean [all],0.8514,0.8508,0.0006,-0.0096,0.0096,0.8860
+uni,max [matched] - max [all],0.8760,0.6866,0.1894,0.0816,0.3029,0.0002
+uni,mean+max [matched] - mean+max [all],0.8728,0.7474,0.1254,0.0321,0.2272,0.0088
+uni,abmil [matched] - abmil [all],0.8802,0.8863,-0.0062,-0.0254,0.0105,0.5192
+uni2_h,max [all] - mean [all],0.7734,0.8846,-0.1112,-0.2183,-0.0078,0.0360
+uni2_h,mean+max [all] - mean [all],0.8259,0.8846,-0.0587,-0.1429,0.0203,0.1448
+uni2_h,abmil [all] - mean [all],0.9293,0.8846,0.0447,0.0133,0.0839,0.0008
+uni2_h,max [all] - abmil [all],0.7734,0.9293,-0.1559,-0.2599,-0.0646,0.0004
+uni2_h,mean+count [all] - mean [all],0.8862,0.8846,0.0016,-0.0057,0.0099,0.7164
+uni2_h,max+count [all] - max [all],0.7729,0.7734,-0.0005,-0.0073,0.0057,0.9292
+uni2_h,mean+max+count [all] - mean+max [all],0.8196,0.8259,-0.0062,-0.0156,0.0005,0.0880
+uni2_h,mean [matched] - mean [all],0.8873,0.8846,0.0027,-0.0024,0.0089,0.3376
+uni2_h,max [matched] - max [all],0.8856,0.7734,0.1122,0.0286,0.2071,0.0080
+uni2_h,mean+max [matched] - mean+max [all],0.8911,0.8259,0.0652,0.0015,0.1348,0.0472
+uni2_h,abmil [matched] - abmil [all],0.9210,0.9293,-0.0083,-0.0245,0.0085,0.2928
+virchow2,max [all] - mean [all],0.7562,0.8773,-0.1211,-0.2214,-0.0182,0.0168
+virchow2,mean+max [all] - mean [all],0.8326,0.8773,-0.0447,-0.1060,0.0213,0.1764
+virchow2,abmil [all] - mean [all],0.9063,0.8773,0.0289,-0.0168,0.0996,0.3460
+virchow2,max [all] - abmil [all],0.7562,0.9063,-0.1500,-0.2666,-0.0339,0.0116
+virchow2,mean+count [all] - mean [all],0.8768,0.8773,-0.0005,-0.0083,0.0068,0.9768
+virchow2,max+count [all] - max [all],0.7531,0.7562,-0.0031,-0.0104,0.0021,0.2976
+virchow2,mean+max+count [all] - mean+max [all],0.8306,0.8326,-0.0021,-0.0104,0.0052,0.6444
+virchow2,mean [matched] - mean [all],0.8755,0.8773,-0.0019,-0.0073,0.0029,0.4352
+virchow2,max [matched] - max [all],0.8729,0.7562,0.1166,0.0330,0.2036,0.0056
+virchow2,mean+max [matched] - mean+max [all],0.8815,0.8326,0.0489,-0.0092,0.1058,0.1016
+virchow2,abmil [matched] - abmil [all],0.9060,0.9063,-0.0002,-0.0152,0.0168,0.9172
+gigapath,max [all] - mean [all],0.7921,0.8914,-0.0993,-0.1913,-0.0073,0.0352
+gigapath,mean+max [all] - mean [all],0.8378,0.8914,-0.0535,-0.1284,0.0166,0.1380
+gigapath,abmil [all] - mean [all],0.9078,0.8914,0.0165,-0.0137,0.0461,0.2504
+gigapath,max [all] - abmil [all],0.7921,0.9078,-0.1157,-0.1979,-0.0322,0.0072
+gigapath,mean+count [all] - mean [all],0.8898,0.8914,-0.0016,-0.0120,0.0078,0.7812
+gigapath,max+count [all] - max [all],0.7926,0.7921,0.0005,-0.0057,0.0078,0.9700
+gigapath,mean+max+count [all] - mean+max [all],0.8316,0.8378,-0.0062,-0.0151,0.0010,0.1100
+gigapath,mean [matched] - mean [all],0.8896,0.8914,-0.0018,-0.0088,0.0051,0.5780
+gigapath,max [matched] - max [all],0.8891,0.7921,0.0970,0.0250,0.1745,0.0072
+gigapath,mean+max [matched] - mean+max [all],0.8963,0.8378,0.0584,-0.0015,0.1206,0.0564
+gigapath,abmil [matched] - abmil [all],0.8967,0.9078,-0.0112,-0.0449,0.0216,0.5300
+feat_tissue,max [all] - mean [all],0.6949,0.6242,0.0707,-0.0608,0.1933,0.2796
+feat_tissue,mean+max [all] - mean [all],0.6887,0.6242,0.0644,-0.0473,0.1741,0.2552
+feat_tissue,mean+count [all] - mean [all],0.5941,0.6242,-0.0301,-0.1804,0.1222,0.7060
+feat_tissue,max+count [all] - max [all],0.6445,0.6949,-0.0504,-0.1455,0.0442,0.2912
+feat_tissue,mean+max+count [all] - mean+max [all],0.6279,0.6887,-0.0608,-0.1471,0.0250,0.1732
+feat_tissue,mean [matched] - mean [all],0.6158,0.6242,-0.0084,-0.0191,0.0017,0.0996
+feat_tissue,max [matched] - max [all],0.7003,0.6949,0.0054,-0.0737,0.0771,0.8764
+feat_tissue,mean+max [matched] - mean+max [all],0.6923,0.6887,0.0036,-0.0659,0.0731,0.9308
+feat_cells,max [all] - mean [all],0.6684,0.8404,-0.1720,-0.2864,-0.0587,0.0024
+feat_cells,mean+max [all] - mean [all],0.6907,0.8404,-0.1497,-0.2713,-0.0312,0.0124
+feat_cells,mean+count [all] - mean [all],0.6689,0.8404,-0.1715,-0.3119,-0.0260,0.0236
+feat_cells,max+count [all] - max [all],0.5146,0.6684,-0.1538,-0.2775,-0.0327,0.0100
+feat_cells,mean+max+count [all] - mean+max [all],0.6112,0.6907,-0.0795,-0.1980,0.0379,0.1876
+feat_cells,mean [matched] - mean [all],0.8483,0.8404,0.0079,-0.0012,0.0190,0.0908
+feat_cells,max [matched] - max [all],0.6203,0.6684,-0.0481,-0.1511,0.0588,0.3440
+feat_cells,mean+max [matched] - mean+max [all],0.7442,0.6907,0.0535,-0.0805,0.1826,0.4160
+feat_interp,max [all] - mean [all],0.7666,0.8404,-0.0738,-0.1871,0.0333,0.1836
+feat_interp,mean+max [all] - mean [all],0.8082,0.8404,-0.0322,-0.1429,0.0738,0.5876
+feat_interp,mean+count [all] - mean [all],0.7328,0.8404,-0.1076,-0.2380,0.0270,0.1120
+feat_interp,max+count [all] - max [all],0.6907,0.7666,-0.0759,-0.1648,0.0083,0.0808
+feat_interp,mean+max+count [all] - mean+max [all],0.7557,0.8082,-0.0525,-0.1362,0.0291,0.2104
+feat_interp,mean [matched] - mean [all],0.8541,0.8404,0.0137,0.0015,0.0283,0.0280
+feat_interp,max [matched] - max [all],0.7884,0.7666,0.0218,-0.0396,0.0883,0.5004
+feat_interp,mean+max [matched] - mean+max [all],0.8565,0.8082,0.0483,-0.0184,0.1162,0.1512
+feat_interp vs phikon_ref,mean [all] - mean [all],0.8404,0.7926,0.0478,-0.0458,0.1450,0.3392
+feat_interp vs phikon_ref,mean [all] - abmil [all],0.8404,0.8560,-0.0156,-0.0859,0.0548,0.6580
+feat_interp vs phikon,mean [all] - mean [all],0.8404,0.7890,0.0515,-0.0478,0.1570,0.3264
+feat_interp vs phikon,mean [all] - abmil [all],0.8404,0.8547,-0.0143,-0.0854,0.0546,0.7044
+feat_interp vs phikon_v2,mean [all] - mean [all],0.8404,0.8212,0.0192,-0.0728,0.1185,0.7144
+feat_interp vs phikon_v2,mean [all] - abmil [all],0.8404,0.8789,-0.0385,-0.1211,0.0425,0.3456
+feat_interp vs uni,mean [all] - mean [all],0.8404,0.8508,-0.0104,-0.0842,0.0660,0.7684
+feat_interp vs uni,mean [all] - abmil [all],0.8404,0.8863,-0.0459,-0.1150,0.0225,0.1876
+feat_interp vs uni2_h,mean [all] - mean [all],0.8404,0.8846,-0.0442,-0.1128,0.0213,0.1900
+feat_interp vs uni2_h,mean [all] - abmil [all],0.8404,0.9293,-0.0889,-0.1513,-0.0333,0.0012
+feat_interp vs virchow2,mean [all] - mean [all],0.8404,0.8773,-0.0369,-0.1237,0.0598,0.4228
+feat_interp vs virchow2,mean [all] - abmil [all],0.8404,0.9063,-0.0658,-0.1367,0.0014,0.0556
+feat_interp vs gigapath,mean [all] - mean [all],0.8404,0.8914,-0.0509,-0.1216,0.0146,0.1316
+feat_interp vs gigapath,mean [all] - abmil [all],0.8404,0.9078,-0.0674,-0.1447,0.0061,0.0684

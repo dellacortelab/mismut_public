@@ -1,0 +1,22 @@
+# Python 3.12. Versions used for the Mac sanity-gate run (2026-10-15). On Linux the torch wheel includes CUDA.
+torch==2.14.1
+torchvision==0.29.1
+timm==1.0.30
+transformers==5.20.0
+huggingface-hub==2.2.0
+safetensors==0.8.0
+numpy==2.5.4
+pandas==3.0.6
+pyarrow==26.0.0
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+matplotlib==3.11.2
+tqdm==4.70.1
+pillow==12.3.0
+opencv-python-headless==5.0.0.93
+openslide-python==1.4.6
+openslide-bin==4.0.1.2
+wsidicom==0.36.1
+imagecodecs==2026.10.10
+idc-index==0.13.2
