@@ -2,7 +2,9 @@
 
 Code and results for *"From prediction to morphology: a deconfounded recipe for H&E biomarker discovery, applied to
 microsatellite instability"* (Della Corte, Hopson, Szymanski, Perry; manuscript in preparation). Data deposit: Zenodo
-[10.5281/zenodo.23666864](https://doi.org/10.5281/zenodo.23666864).
+[10.5281/zenodo.23666864](https://doi.org/10.5281/zenodo.23666864). Code, all versions: Zenodo
+[10.5281/zenodo.23667396](https://doi.org/10.5281/zenodo.23667396) (v1.0:
+[10.5281/zenodo.23667397](https://doi.org/10.5281/zenodo.23667397)).
 
 ## What this repository shows
 
