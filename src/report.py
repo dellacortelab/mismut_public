@@ -306,7 +306,7 @@ def fig1(m, encs, name="fig1_random_vs_source"):
             ax.scatter(x, e2, s=36, marker=MARKER[agg], facecolor="white", edgecolor=COLOR[agg], lw=1.4, zorder=3)
     c1 = get(m, "count-only", "count", "E1_random_cv_10x5")
     ax.axhline(c1, color=INK2, lw=0.8, ls="--")
-    ax.text(-0.45, c1 + 0.005, f"patch count alone, random CV ({c1:.2f})", ha="left", va="bottom",
+    ax.text(-0.45, 0.55, f"dashed line: patch count alone, random CV ({c1:.2f})", ha="left", va="bottom",
             color=INK2, fontsize=7.5)
     ax.axhline(0.5, color=INK2, lw=0.6, ls=":")
     ax.set_xticks(range(len(encs)), [ENC_LABEL[e] for e in encs])
@@ -346,33 +346,40 @@ def fig2(conf, encs):
 
 
 def fig3(m, encs):
+    """Fixed-N subsampling. Page-width layout: two encoders per row, each as a random-CV / test-split pair."""
     Ns = [25, 50, 100, 200]
-    fig, axs = plt.subplots(2, len(encs), figsize=(1.9 * len(encs), 4.4), sharey=True, sharex=True, squeeze=False)
-    for r, proto in enumerate(("E1", "E2")):
-        for c, e in enumerate(encs):
-            ax = axs[r, c]
+    encs = [e for e in ("phikon", "phikon_v2", "uni", "uni2_h", "virchow2", "gigapath") if e in encs]  # the six FMs
+    nrow = (len(encs) + 1) // 2
+    fig, axs = plt.subplots(nrow, 4, figsize=(7.2, 1.85 * nrow + 0.6), sharey=True, sharex=True, squeeze=False)
+    for i, e in enumerate(encs):
+        for k, proto in enumerate(("E1", "E2")):
+            ax = axs[i // 2, (i % 2) * 2 + k]
             for agg in AGG_ORDER:
                 v = [get(m, e, agg, f"E3a_fixedN{N}_{proto}") for N in Ns]
                 sd = [get(m, e, agg, f"E3a_fixedN{N}_{proto}", col="sd") for N in Ns]
                 if np.all(np.isnan(v)):
                     continue
-                ax.errorbar(Ns, v, yerr=sd, color=COLOR[agg], marker=MARKER[agg], ms=4, lw=1.5, capsize=0,
-                            elinewidth=0.8)
+                ax.errorbar(Ns, v, yerr=sd, color=COLOR[agg], marker=MARKER[agg], ms=3, lw=1.2, capsize=0,
+                            elinewidth=0.7)
                 comp = [get(m, e, agg, f"E3a_allpatch_eligibleN{N}_{proto}") for N in Ns]
-                ax.plot(Ns, comp, color=COLOR[agg], lw=1.0, ls="--", alpha=0.8)
+                ax.plot(Ns, comp, color=COLOR[agg], lw=0.9, ls="--", alpha=0.8)
             ax.set_xscale("log")
-            ax.set_xticks(Ns, [str(n) for n in Ns])
+            ax.set_xticks(Ns, [str(n) for n in Ns], fontsize=7)
             ax.minorticks_off()
-            if r == 0:
-                ax.set_title(ENC_LABEL[e], fontsize=9)
-            if c == 0:
-                ax.set_ylabel(("Random CV" if proto == "E1" else "Source split") + "\nROC-AUC")
-            if r == 1:
-                ax.set_xlabel("Patches per patient (N)")
+            ax.tick_params(labelsize=7)
+            ax.set_title(f"{ENC_LABEL[e]}: {'random CV' if proto == 'E1' else 'test split'}", fontsize=7.5)
+            if (i % 2) * 2 + k == 0:
+                ax.set_ylabel("ROC-AUC", fontsize=8)
+            if i // 2 == nrow - 1:
+                ax.set_xlabel("Tiles per patient (N)", fontsize=7.5)
+    for j in range(len(encs), nrow * 2):
+        for k in range(2):
+            axs[j // 2, (j % 2) * 2 + k].set_visible(False)
     h = [plt.Line2D([], [], color=COLOR[a], marker=MARKER[a], label=AGG_LABEL[a]) for a in AGG_ORDER]
     h += [plt.Line2D([], [], color=INK2, ls="-", label="Fixed N (mean ± SD, 10 draws)"),
-          plt.Line2D([], [], color=INK2, ls="--", label="All patches, same eligible patients")]
-    fig.legend(handles=h, ncol=6, loc="upper center", bbox_to_anchor=(0.5, 1.05), fontsize=7.5)
+          plt.Line2D([], [], color=INK2, ls="--", label="All tiles, same patients")]
+    fig.legend(handles=h, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.07), fontsize=7)
+    fig.tight_layout()
     fig.savefig(f"{R}/fig3_fixed_n.png")
     fig.savefig(f"{R}/fig3_fixed_n.pdf")
     plt.close(fig)

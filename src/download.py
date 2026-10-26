@@ -2,7 +2,7 @@
 
   python src/download.py kather   # Zenodo 2530835, four CRC_DX zips (21.7 GB) -> data/raw/CRC_DX_*/
   python src/download.py ref      # Zenodo 22938170, Vardar & Vardar deposit (0.6 GB) -> ref/main, ref/emb_parts
-  MSI_ROOT=data/external/stad python src/download.py stad   # Zenodo 2530835 STAD zips (25.4 GB) -> $MSI_ROOT/data/raw/
+  MSI_ROOT=/mnt/slides/msimut/stad python src/download.py stad   # Zenodo 2530835 STAD zips (25.4 GB) -> $MSI_ROOT/data/raw/
   python src/download.py nct      # Zenodo 1214456, NCT-CRC-HE-100K (Macenko) + CRC-VAL-HE-7K (12.5 GB) -> data/nct/
 
 Zenodo throttles single connections hard (we saw <1 MB/s), so each file is fetched as 8 parallel HTTP range

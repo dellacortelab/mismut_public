@@ -36,22 +36,40 @@ def gdc_dx_file(patient):
     return next(h for h in hits if "DX1" in h["file_name"])
 
 
+def slide_gray(s, mpp0, mpp, block=8192):
+    """Whole slide as float32 grayscale at `mpp`, read in level-0 blocks from the best pyramid level."""
+    ds = mpp / mpp0
+    lvl = s.get_best_level_for_downsample(ds + 1e-6)
+    lds = s.level_downsamples[lvl]
+    W0, H0 = s.dimensions
+    out = np.zeros((int(H0 / ds), int(W0 / ds)), np.float32)
+    for y0 in range(0, H0, block):
+        for x0 in range(0, W0, block):
+            w0, h0 = min(block, W0 - x0), min(block, H0 - y0)
+            im = s.read_region((x0, y0), lvl, (int(np.ceil(w0 / lds)), int(np.ceil(h0 / lds)))).convert("L")
+            ox, oy = int(x0 / ds), int(y0 / ds)
+            tw, th = min(int(round(w0 / ds)), out.shape[1] - ox), min(int(round(h0 / ds)), out.shape[0] - oy)
+            if tw > 0 and th > 0:
+                out[oy:oy + th, ox:ox + tw] = cv2.resize(np.asarray(im, np.float32), (tw, th), interpolation=cv2.INTER_AREA)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--patient", default="TCGA-AD-6895")
     ap.add_argument("--n", type=int, default=12)
     ap.add_argument("--out", default="results/metrics/tile_resolution_check.json")
     a = ap.parse_args()
-    out = os.environ.get("MSI_SLIDES", "data/external/tcga_crc_dx")
+    out = os.environ.get("MSI_SLIDES", "/mnt/slides/msimut/tcga_crc_dx")
     os.makedirs(out, exist_ok=True)
     f = gdc_dx_file(a.patient)
     svs = os.path.join(out, f["file_name"])
     if not os.path.exists(svs):
         urllib.request.urlretrieve(f"https://api.gdc.cancer.gov/data/{f['file_id']}", svs)
     s = openslide.OpenSlide(svs)
-    level = s.get_best_level_for_downsample(4)
-    mpp = float(s.properties["openslide.mpp-x"]) * s.level_downsamples[level]
-    big = np.asarray(s.read_region((0, 0), level, s.level_dimensions[level]).convert("L"), dtype=np.float32)
+    mpp0 = float(s.properties["openslide.mpp-x"])
+    mpp = 1.0  # search image at 1 um/px, built block-wise so slides without a ~4x pyramid level fit in memory
+    big = slide_gray(s, mpp0, mpp)
 
     idx = pd.read_parquet(os.path.join(ROOT, "data/index.parquet"))
     tiles = idx[idx.patient_id == a.patient].path.tolist()

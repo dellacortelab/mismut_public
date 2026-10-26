@@ -1,7 +1,8 @@
-# mismut: auditing the Kather TCGA MSI tile benchmark
+# mismut: from prediction to morphology for MSI in colorectal cancer
 
-Code and results for *"Auditing a widely used MSI pathology benchmark reveals shortcut learning and a resolution
-error"* (Della Corte, Hopson, Perry; manuscript in preparation).
+Code and results for *"From prediction to morphology: a deconfounded recipe for H&E biomarker discovery, applied to
+microsatellite instability"* (Della Corte, Hopson, Szymanski, Perry; manuscript in preparation). Data deposit: Zenodo
+[10.5281/zenodo.23666864](https://doi.org/10.5281/zenodo.23666864).
 
 ## What this repository shows
 
@@ -18,9 +19,21 @@ foundation models and four aggregation methods.
    Mean pooling and attention MIL are robust.
 2. **Resolution error.** The tiles are 256 µm regions at 224 px, i.e. **1.143 µm/px, not the documented 0.5 µm/px**.
    We registered all 192,312 tiles to their 364 source TCGA slides. The coordinates are in
-   `results/tile_slide_registration.csv.gz` and on Zenodo [DOI pending].
+   `results/tile_slide_registration.csv.gz` and on Zenodo
+   ([10.5281/zenodo.23666864](https://doi.org/10.5281/zenodo.23666864)).
 3. **Where the signal is.** On whole slides the MSI signal is intratumoral. Whole-tumor models transfer to CPTAC-COAD
    (PCR MSI-H) and SurGen (IHC dMMR) with AUC 0.86 to 0.93.
+4. **Label errors.** 14 released labels contradict TCGA PanCancer Atlas molecular data (hypermutated or MSIsensor-high
+   patients labelled MSS, and MSI-labelled patients without MSI or hypermutation). Excluding the 5 in the test split
+   raises attention-MIL test AUC from 0.919 to 0.973 (`results/metrics/label_audit.csv`).
+5. **Interpretable comparator and clinical operating points.** Intraepithelial lymphocyte density on identical tumor
+   tiles reaches AUC 0.79, 0.73 and 0.62 (TCGA, CPTAC, SurGen) against 0.92, 0.95 and 0.88 for attention MIL.
+   Thresholds fixed on training out-of-fold predictions; external calibration under-predicts MSI
+   (`results/operating_points.md`).
+6. **Pathologist review of attended regions.** Two blinded pathologists described 180 high- and low-attention
+   regions on 20 test patients. In this exploratory analysis neutrophil presence separated MSI from MSS patients
+   (AUC 0.91); attention-gated cell counts could not validate it because the gate makes every cell type
+   discriminative (`results/review/summary.md`, `results/metrics/gate_controls.csv`).
 
 Findings with numbers: [`results/README.md`](results/README.md). Tables: [`results/tables.md`](results/tables.md),
 [`results/external_store.md`](results/external_store.md).
@@ -58,6 +71,23 @@ Large data go under `data/` (git-ignored). Override storage locations with envir
 | External | `src/cptac.py`, `src/surgen.py`, `src/tumor_tiles.py`, `src/external.py`, `src/external_fm.py` | CPTAC-COAD (IDC), SurGen (BioImage Archive); TCGA-trained models applied unchanged |
 | Report | `src/report.py`, `src/figs_extra.py` | Tables and figures |
 
+Later analyses (run after the core pipeline):
+
+| Step | Script | What it does |
+|---|---|---|
+| Identical tumor tiles | `src/iel_fm.py`, `src/iel_fm_max.py`, `src/surgen_cells.py` | IEL density vs FM attention MIL, and max pooling with released bag sizes, on the same tiles in three cohorts |
+| Attention | `src/attention_enrichment.py`, `src/fig_attention.py`, `src/bagsize_external.py` | Cell-class enrichment under attention; bag-size checks on external cohorts |
+| Patch probe | `src/patch_probe.py` | Tile-level probe of the slide-level signal |
+| Operating points | `src/operating_points.py` | Out-of-fold thresholds on TRAIN (rule-out, Youden), calibration, three cohorts |
+| Label audit | `src/fetch_molecular.py`, `src/label_audit.py` | cBioPortal TMB / MANTIS / MSIsensor / POLE vs released labels |
+| Review regions | `src/review_regions.py`, `src/overview_crops.py` | Select high- and low-attention regions for blinded review |
+| Review analysis | `src/review_analysis.py`, `src/gate_controls.py` | Unblind and analyse responses (Fig. 4); attention-gate controls with permuted labels |
+| Deposit | `src/zenodo_bundle.py` | Anonymised review files for Zenodo |
+
+To reproduce the review analysis from the deposit: unzip `review.zip` from Zenodo, then
+`python src/review_analysis.py from-deposit <dir>`, `python src/fetch_molecular.py` and
+`python src/review_analysis.py analyze data/review/export_deposit.csv`.
+
 `run_all.sh` runs the core TCGA pipeline (download, index, fp16 check, extraction, evaluation, report).
 
 ## Data sources
@@ -73,8 +103,8 @@ All public:
 ## Not included
 
 One secondary analysis in the manuscript (a zero-shot tumor map from a proprietary prostate cancer detector) uses a
-model that is not publicly available. Its code is not part of this repository. All other analyses run from this code
-and public data.
+model that is not publicly available. Its code is not part of this repository; its outputs are
+(`results/p1_*.md`, `results/metrics/p1_*.csv`). All other analyses run from this code and public data.
 
 ## Citation
 

@@ -34,7 +34,7 @@ import wsi_eval as W  # noqa: E402
 
 ROOT = P.ROOT
 CPTAC = os.path.join(ROOT, "data/cptac")
-WSI_C = os.environ.get("MSI_WSI_CPTAC", "data/external/wsi_cptac")
+WSI_C = os.environ.get("MSI_WSI_CPTAC", "/mnt/slides/msimut/wsi_cptac")
 ENC = "flash"
 SEEDS = (0, 1, 2, 3, 4)
 MIN_TILES = 20

@@ -12,7 +12,7 @@ Only the slides the Kather tiles came from are used (364 slides, 360 patients).
 
   python src/wsi_regions.py plan            # tissue + region masks at 8 um/px -> data/wsi/plan.parquet, QA figure
   python src/wsi_regions.py embed --encoder flash [--workers 24]
-                                            # -> data/external/wsi/<encoder>/<barcode>.npz (coords, region, emb)
+                                            # -> /mnt/slides/msimut/wsi/<encoder>/<barcode>.npz (coords, region, emb)
 """
 import argparse
 import glob
@@ -30,8 +30,8 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(__file__))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLIDES = os.environ.get("MSI_SLIDES", "data/external/tcga_crc_dx")
-OUT = os.environ.get("MSI_WSI", "data/external/wsi")
+SLIDES = os.environ.get("MSI_SLIDES", "/mnt/slides/msimut/tcga_crc_dx")
+OUT = os.environ.get("MSI_WSI", "/mnt/slides/msimut/wsi")
 PLAN = os.path.join(ROOT, "data/wsi/plan.parquet")
 MASK_UM = 8.0                       # mask resolution
 TILE_PX, TILE_MPP = 224, 0.5        # 112 um tiles
@@ -176,6 +176,9 @@ def cmd_embed(a):
     plan = pd.read_parquet(PLAN)
     if a.limit_slides:
         plan = plan[plan.barcode.isin(sorted(plan.barcode.unique())[:a.limit_slides])].reset_index(drop=True)
+    if a.patients:
+        want = set(open(a.patients).read().split())
+        plan = plan[plan.barcode.str[:12].isin(want)].reset_index(drop=True)
     out = os.path.join(OUT, a.encoder)
     os.makedirs(out, exist_ok=True)
     todo = [b for b in sorted(plan.barcode.unique()) if not os.path.exists(os.path.join(out, b + ".npz"))]
@@ -226,6 +229,7 @@ def main():
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--fp16", action="store_true", help="autocast (for the large encoders; flash runs its own fp16)")
     ap.add_argument("--limit-slides", type=int, default=0)
+    ap.add_argument("--patients", help="file with TCGA patient ids to restrict to")
     a = ap.parse_args()
     {"plan": cmd_plan, "embed": cmd_embed}[a.cmd](a)
 

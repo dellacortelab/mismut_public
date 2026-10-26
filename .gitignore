@@ -9,3 +9,6 @@ emb/
 ref/
 logs/
 results/preds/
+
+# unblinded per-region review data stays local (blinding)
+results/review/responses_unblinded.csv

@@ -20,8 +20,8 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLIDES = os.environ.get("MSI_SURGEN", "data/external/surgen/SR386_WSIs")
-OUT = os.environ.get("MSI_WSI_SURGEN", "data/external/wsi_surgen")
+SLIDES = os.environ.get("MSI_SURGEN", "/mnt/nas/msimut/surgen/SR386_WSIs")
+OUT = os.environ.get("MSI_WSI_SURGEN", "/mnt/slides/msimut/wsi_surgen")
 DATA = os.path.join(ROOT, "data/surgen")
 MASK_UM, TILE_PX, TILE_MPP, MIN_TISSUE, BLOCK = 8.0, 224, 0.5, 0.5, 8
 CELLS = int(TILE_PX * TILE_MPP / MASK_UM)

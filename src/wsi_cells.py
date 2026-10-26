@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import cells  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLIDES = os.environ.get("MSI_SLIDES", "data/external/tcga_crc_dx")
+SLIDES = os.environ.get("MSI_SLIDES", "/mnt/slides/msimut/tcga_crc_dx")
 REGIONS = os.path.join(ROOT, "data/wsi/regions_flash.parquet")
 OUT = os.path.join(ROOT, "data/wsi/cells_tumor.parquet")
 NMAX, SEED = 1000, 0

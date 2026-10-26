@@ -24,7 +24,7 @@ import wsi_eval as W  # noqa: E402
 from external import auc_ci  # noqa: E402
 
 ROOT = P.ROOT
-STORE = os.environ.get("MSI_TILES", "data/external/tumor_tiles")
+STORE = os.environ.get("MSI_TILES", "/mnt/slides/msimut/tumor_tiles")
 SEEDS = (0, 1, 2, 3, 4)
 MIN_TILES = 20
 LABEL = {"flash": "Prov-GigaPath-flash", "uni2_h": "UNI2-h", "virchow2": "Virchow2", "gigapath": "Prov-GigaPath"}
@@ -94,7 +94,7 @@ def run_surgen(enc):
     D = P.Design()
     idx = pd.read_parquet(os.path.join(STORE, "index.parquet"))
     E = np.asarray(np.load(os.path.join(STORE, "emb", f"{enc}.f16.npy"), mmap_mode="r"))
-    s2 = os.environ.get("MSI_TILES_SURGEN", "data/external/tumor_tiles_surgen")
+    s2 = os.environ.get("MSI_TILES_SURGEN", "/mnt/slides/msimut/tumor_tiles_surgen")
     gidx = pd.read_parquet(os.path.join(s2, "index.parquet"))
     G = np.asarray(np.load(os.path.join(s2, "emb", f"{enc}.f16.npy"), mmap_mode="r"))
     lab = pd.read_csv(os.path.join(ROOT, "data/surgen/subset.csv"), dtype={"case_id": str}).set_index("case_id")

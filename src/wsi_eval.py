@@ -45,7 +45,7 @@ import eval_lr  # noqa: E402
 import protocols as P  # noqa: E402
 
 ROOT = P.ROOT
-WSI = os.environ.get("MSI_WSI", "data/external/wsi")
+WSI = os.environ.get("MSI_WSI", "/mnt/slides/msimut/wsi")
 PLAN = os.path.join(ROOT, "data/wsi/plan.parquet")
 TILE_UM, MARGIN_UM, MIN_TILES, NEG_UM = 112.0, 1000.0, 20, 300.0
 SETS = {"tumor": (0,), "margin": (1,), "distant": (2,), "tumor+margin": (0, 1), "non-tumor": (1, 2),

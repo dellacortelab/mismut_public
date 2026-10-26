@@ -1,7 +1,7 @@
 """Build data/index.parquet (one row per patch) from the Kather CRC_DX folders and verify against the paper.
 
   python src/build_index.py                                        # CRC_DX (verified against the target paper)
-  MSI_ROOT=data/external/stad python src/build_index.py --cohort STAD   # verified against the Zenodo tile counts
+  MSI_ROOT=/mnt/slides/msimut/stad python src/build_index.py --cohort STAD   # verified against the Zenodo tile counts
 """
 import os
 import re

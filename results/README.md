@@ -181,6 +181,28 @@ from KongNet at true 0.5 µm/px on up to 1,000 tumor tiles per patient. Code: `s
   stains. On this evidence, the foundation-model route beats the handcrafted-feature route for MSI.
 - **Caveats:** 14 external positives (wide CIs); one encoder; CPTAC labels are PCR MSI-H versus TCGA MSIMUT.
 
+## E11. Kather-independent tumor definition: the prostate patch-cancer head P1, zero-shot
+
+P1 (pathtools; per-token MLP for P(inside a cancerous gland), trained on ~150 M prostate patch tokens) was applied
+without retraining. Zero-shot on NCT CRC-VAL-HE-7K, Virchow1 P1:
+- tumor scores mean 0.81; lymphocytes, stroma, muscle, mucus and fat score 0.03 to 0.11 (AUC vs tumor ≥ 0.998)
+- normal colon mucosa scores 0.50 (AUC vs tumor 0.958); the false positives sit in the lamina propria and mucin,
+  not in benign crypt epithelium
+- TCGA tumor vs non-tumor (Kather tiles as reference): Virchow1 P1 AUC 0.879, edge-model P1 0.876, versus 0.893
+  for our in-domain classifier trained on that task
+
+Edge-model P1 was then run on all 3.9 M TCGA and 572k CPTAC tiles, with tumor = 3x3-smoothed mean P1 ≥ 0.5 (fixed
+a priori). This map is more conservative than the Kather-derived one (43% vs 63% of TCGA tissue; Jaccard overlap
+0.65 on TCGA, 0.53 on CPTAC). Yet the whole-tumor MSI models are unchanged (`p1_regions.md`; models fit on TCGA
+TRAIN only):
+
+| Model | TCGA TEST: Kather map → P1 map | CPTAC: Kather map → P1 map |
+|---|---|---|
+| ABMIL | 0.915 → 0.910 (Δ −0.006 [−0.029, +0.014]) | 0.935 → 0.927 (Δ −0.007 [−0.065, +0.051]) |
+| LR mean | 0.874 → 0.876 (Δ +0.002) | 0.823 → 0.807 (Δ −0.016) |
+
+The MSI findings do not depend on Kather's tumor detector. A prostate-trained cancer head serves as a zero-shot
+tumor finder for colon.
 
 ## E12. Second external cohort: SurGen SR386 (Scotland, Zeiss CZI, IHC-defined dMMR)
 

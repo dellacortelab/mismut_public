@@ -23,7 +23,7 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(__file__))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STORE = os.environ.get("MSI_TILES", "data/external/tumor_tiles")
+STORE = os.environ.get("MSI_TILES", "/mnt/slides/msimut/tumor_tiles")
 CAP, SEED = 4000, 0
 
 
@@ -57,7 +57,7 @@ class Reader:
             self.kind = "dcm"
         elif cohort == "tcga":
             import openslide
-            self.s = openslide.OpenSlide(glob.glob(f"data/external/tcga_crc_dx/{slide}.*.svs")[0])
+            self.s = openslide.OpenSlide(glob.glob(os.path.join(os.environ.get("MSI_SLIDES", "/mnt/slides/msimut/tcga_crc_dx"), f"{slide}.*.svs"))[0])
             self.kind = "os"
         else:
             import cptac

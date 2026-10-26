@@ -4,9 +4,9 @@ Slides: H&E "tumor_tissue" or unlabeled "HE" series of patients with a PCR MSI c
 Mutation_Phenotype; Vasaikar et al. 2019): 110 slides, 62 patients (14 MSI-H, 48 MSS); data/cptac/slides.csv.
 Read with wsidicom (OpenSlide cannot decode their JPEG 2000 YBR_FULL_422 tiles).
 
-  python src/cptac.py download                 # idc-index -> data/external/cptac_coad/<patient>/<series>/
+  python src/cptac.py download                 # idc-index -> /mnt/slides/msimut/cptac_coad/<patient>/<series>/
   python src/cptac.py plan                     # tissue mask at 8 um/px, 224 px @ 0.5 um/px lattice -> data/cptac/plan.parquet
-  python src/cptac.py embed --encoder flash    # -> data/external/wsi_cptac/<encoder>/<series>.npz
+  python src/cptac.py embed --encoder flash    # -> /mnt/slides/msimut/wsi_cptac/<encoder>/<series>.npz
   .venv-tia/bin/python src/cptac.py cells      # KongNet on up to NMAX tumor-map tiles/patient -> data/cptac/cells_tumor.parquet
                                                # (needs data/cptac/tumor_map.parquet from external.py)
 """
@@ -25,8 +25,8 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(__file__))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLIDES = os.environ.get("MSI_CPTAC", "data/external/cptac_coad")
-OUT = os.environ.get("MSI_WSI_CPTAC", "data/external/wsi_cptac")
+SLIDES = os.environ.get("MSI_CPTAC", "/mnt/slides/msimut/cptac_coad")
+OUT = os.environ.get("MSI_WSI_CPTAC", "/mnt/slides/msimut/wsi_cptac")
 DATA = os.path.join(ROOT, "data/cptac")
 MASK_UM, TILE_PX, TILE_MPP, MIN_TISSUE, BLOCK, NMAX = 8.0, 224, 0.5, 0.5, 8, 1000
 CELLS = int(TILE_PX * TILE_MPP / MASK_UM)

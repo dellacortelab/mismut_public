@@ -11,7 +11,7 @@ Registration (grayscale, normalized cross-correlation):
 Scale check: for SWEEP_N tiles per slide, the NCC at the found position is recomputed at several candidate pixel
 sizes (local search), so the true scale is verified on every slide.
 
-Slides (~239 GB) are kept in MSI_SLIDES (default data/external/tcga_crc_dx, second NVMe) for later
+Slides (~239 GB) are kept in MSI_SLIDES (default /mnt/slides/msimut/tcga_crc_dx, second NVMe) for later
 raw-slide work; with --delete-slides they are streamed instead (download, register, cut, delete).
 
   .venv-tia/bin/python src/retile.py [--workers 16] [--limit-slides N]
@@ -35,7 +35,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data/retile")
-SLIDES = os.environ.get("MSI_SLIDES", "data/external/tcga_crc_dx")
+SLIDES = os.environ.get("MSI_SLIDES", "/mnt/slides/msimut/tcga_crc_dx")
 TILE_UM, TILE_PX = 256.0, 224
 T = TILE_UM / TILE_PX          # 1.143 um/px, tile scale
 COARSE = 4 * T                 # 4.571 um/px
